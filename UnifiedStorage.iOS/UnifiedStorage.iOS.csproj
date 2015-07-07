@@ -16,27 +16,33 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\iPhone\Debug</OutputPath>
+    <OutputPath>..\bin\iOS\Debug\</OutputPath>
     <DefineConstants>DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <MtouchDebug>true</MtouchDebug>
     <CodesignKey>iPhone Developer</CodesignKey>
+    <DocumentationFile>..\bin\iOS\Debug\UnifiedStorage.iOS.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\iPhone\Release</OutputPath>
+    <OutputPath>..\bin\iOS\Release\</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <CodesignKey>iPhone Developer</CodesignKey>
+    <DocumentationFile>..\bin\iOS\Release\UnifiedStorage.iOS.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\UnifiedStorage.Desktop\UnifiedStorage.Desktop.csproj">
+      <Project>{03f85fc3-3534-4489-ade7-4327b99ca33b}</Project>
+      <Name>UnifiedStorage.Desktop</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UnifiedStorage.DotNet\UnifiedStorage.DotNet.csproj">
       <Project>{5ed58594-002a-4fa9-b29d-8b5763837baf}</Project>
       <Name>UnifiedStorage.DotNet</Name>
