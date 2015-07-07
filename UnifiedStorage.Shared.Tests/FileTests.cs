@@ -82,7 +82,7 @@ namespace UnifiedStorage.Shared.Tests
         }
 
         [Test]
-        public virtual async Task Verify_that_Exists_returns_false_for_a_nonexistent_file()
+        public virtual async Task Verify_that_ExistsAsync_returns_false_for_a_nonexistent_file()
         {
             var filePath = Filesystem.CreatePath(Filesystem.LocalStorage.Path);
 
@@ -94,7 +94,20 @@ namespace UnifiedStorage.Shared.Tests
         }
 
         [Test]
-        public virtual async Task Verify_that_a_file_can_be_moved_no_collision()
+        public virtual async Task Verify_that_ExistsAsync_returns_true_for_an_existing_file()
+        {
+            var filename = CreateUniqueFileName();
+            var folder = Filesystem.LocalStorage;
+            var sourceFile = await GenerateFileAsync(folder, filename);
+
+            (await sourceFile.ExistsAsync()).Should().BeTrue();
+
+            // Cleanup
+            await sourceFile.DeleteAsync();
+        }
+
+        [Test]
+        public virtual async Task Verify_that_MoveAsync_succeeds()
         {
             var filename = CreateUniqueFileName();
             var newFilename = CreateUniqueFileName();
@@ -113,7 +126,7 @@ namespace UnifiedStorage.Shared.Tests
         }
 
         [Test]
-        public virtual async Task Verify_that_a_file_can_be_moved_and_replaces_the_destination_if_specified()
+        public virtual async Task Verify_that_MoveAsync_succeeds_and_replaces_the_destination_if_ReplaceExisting_is_specified()
         {
             var filename = CreateUniqueFileName();
             var newFilename = CreateUniqueFileName();
@@ -134,7 +147,7 @@ namespace UnifiedStorage.Shared.Tests
         }
 
         [Test]
-        public virtual async Task Verify_that_a_file_can_be_moved_and_a_new_name_is_generated_if_specified()
+        public virtual async Task Verify_that_MoveAsync_succeeds_and_a_new_name_is_generated_if_specified()
         {
             var filename = CreateUniqueFileName();
             var newFilename = CreateUniqueFileName();
@@ -157,7 +170,7 @@ namespace UnifiedStorage.Shared.Tests
         }
 
         [Test]
-        public virtual async Task Verify_that_a_MoveAsync_throws_an_exception_if_the_destination_file_exists_and_the_option_is_specified()
+        public virtual async Task Verify_that_a_MoveAsync_throws_an_exception_if_the_destination_file_exists_and_FailIfExists_is_specified()
         {
             var filename = CreateUniqueFileName();
             var newFilename = CreateUniqueFileName();
@@ -169,6 +182,112 @@ namespace UnifiedStorage.Shared.Tests
             var existingFile = await GenerateFileAsync(folder, newFilename);
 
             Func<Task> act = () => sourceFile.MoveAsync(newFilepath, CollisionOption.FailIfExists);
+            act.ShouldThrow<Exceptions.UnifiedIOException>();
+
+            (await sourceFile.ExistsAsync()).Should().BeTrue("Expecting the source file to be untouched");
+
+            // Cleanup
+            await existingFile.DeleteAsync();
+            await sourceFile.DeleteAsync();
+        }
+
+        [Test]
+        public virtual async Task Verify_that_DeleteAsync_deletes_an_existing_file()
+        {
+            var filename = CreateUniqueFileName();
+            var folder = Filesystem.LocalStorage;
+            var sourceFile = await GenerateFileAsync(folder, filename);
+
+            (await sourceFile.ExistsAsync()).Should().BeTrue();
+
+            await sourceFile.DeleteAsync();
+
+            (await sourceFile.ExistsAsync()).Should().BeFalse();
+        }
+
+        [Test]
+        public virtual async Task Verify_that_DeleteAsync_throws_an_exception_if_the_file_does_not_exist()
+        {
+            var filename = CreateUniqueFileName();
+            var folder = Filesystem.LocalStorage;
+            var path = Filesystem.CreatePath(folder.Path);
+
+            var sourceFile = await Filesystem.GetFileFromPathAsync(path.Combine(filename));
+
+            (await sourceFile.ExistsAsync()).Should().BeFalse();
+
+            Func<Task> act = () => sourceFile.DeleteAsync();
+            act.ShouldThrow<Exceptions.FileNotFoundException>();
+        }
+
+        [Test]
+        public virtual async Task Verify_that_RenameAsync_succeeds()
+        {
+            var filename = CreateUniqueFileName();
+            var newFilename = CreateUniqueFileName();
+            var folder = Filesystem.LocalStorage;
+
+            var file = await GenerateFileAsync(folder, filename);
+            var newFile = await file.RenameAsync(newFilename, CollisionOption.FailIfExists);
+
+            file.Path.Should().Be(newFile.Path);
+            file.Name.Should().Be(newFilename);
+
+            // Cleanup
+            await file.DeleteAsync();
+        }
+
+        [Test]
+        public virtual async Task Verify_that_RenameAsync_succeeds_and_replaces_the_destination_if_ReplaceExisting_is_specified()
+        {
+            var filename = CreateUniqueFileName();
+            var newFilename = CreateUniqueFileName();
+            var folder = Filesystem.LocalStorage;
+
+            var file = await GenerateFileAsync(folder, filename);
+            await GenerateFileAsync(folder, newFilename);
+
+            var newFile = await file.RenameAsync(newFilename, CollisionOption.ReplaceExisting);
+
+            file.Path.Should().Be(newFile.Path);
+            file.Name.Should().Be(newFile.Name);
+
+            // Cleanup
+            await file.DeleteAsync();
+        }
+
+        [Test]
+        public virtual async Task Verify_that_RenameAsync_succeeds_and_a_new_name_is_generated_if_specified()
+        {
+            var filename = CreateUniqueFileName();
+            var newFilename = CreateUniqueFileName();
+            var folder = Filesystem.LocalStorage;
+
+            var sourceFile = await GenerateFileAsync(folder, filename);
+            var existingFile = await GenerateFileAsync(folder, newFilename);
+
+            var newFile = await sourceFile.RenameAsync(newFilename, CollisionOption.GenerateUniqueName);
+
+            newFile.Path.Should().NotBe(existingFile.Path);
+            newFile.Name.Should().NotBe(existingFile.Name);
+            (await newFile.ExistsAsync()).Should().BeTrue();
+
+            // Cleanup
+            await existingFile.DeleteAsync();
+            await newFile.DeleteAsync();
+        }
+
+        [Test]
+        public virtual async Task Verify_that_a_RenameAsync_throws_an_exception_if_the_destination_file_exists_and_FailIfExists_is_specified()
+        {
+            var filename = CreateUniqueFileName();
+            var newFilename = CreateUniqueFileName();
+            var folder = Filesystem.LocalStorage;
+
+            var sourceFile = await GenerateFileAsync(folder, filename);
+            var existingFile = await GenerateFileAsync(folder, newFilename);
+
+            Func<Task> act = () => sourceFile.RenameAsync(newFilename, CollisionOption.FailIfExists);
             act.ShouldThrow<Exceptions.UnifiedIOException>();
 
             (await sourceFile.ExistsAsync()).Should().BeTrue("Expecting the source file to be untouched");
