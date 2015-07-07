@@ -5,6 +5,9 @@ namespace UnifiedStorage.Desktop
 {
     public class FileSystem : DotNetFileSystem
     {
+        /// <summary>
+        /// A folder representing storage which is local to the current device.
+        /// </summary>
         public override IDirectory LocalStorage
         {
             get
@@ -14,6 +17,9 @@ namespace UnifiedStorage.Desktop
             }
         }
 
+        /// <summary>
+        /// A folder representing storage which may be synced with other devices for the same user.
+        /// </summary>
         public override IDirectory RoamingStorage
         {
             get

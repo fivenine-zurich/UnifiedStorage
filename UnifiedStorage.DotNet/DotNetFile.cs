@@ -124,7 +124,7 @@ namespace UnifiedStorage.DotNet
                     {
                         case CollisionOption.FailIfExists:
                         {
-                            throw new IOException("File already exists.");
+                            throw new Exceptions.UnifiedIOException("File already exists.");
                         }
 
                         case CollisionOption.GenerateUniqueName:

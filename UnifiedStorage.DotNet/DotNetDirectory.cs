@@ -66,7 +66,7 @@ namespace UnifiedStorage.DotNet
                         break;
                     }
                     case CollisionOption.FailIfExists:
-                        throw new Exceptions.IOException("Cannot create file, it already exists");
+                        throw new Exceptions.UnifiedIOException("Cannot create file, it already exists");
 
                     case CollisionOption.OpenIfExists:
                     {

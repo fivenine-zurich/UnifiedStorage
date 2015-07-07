@@ -7,15 +7,18 @@ using UnifiedStorage.Extensions;
 
 namespace UnifiedStorage.DotNet
 {
+    /// <summary>
+    /// A <see cref="IFileSystem"/> implementation base class for the classic .NET System.IO API.
+    /// </summary>
     public abstract class DotNetFileSystem : IFileSystem
     {
         /// <summary>
-        /// A folder representing storage which is local to the current device
+        /// A folder representing storage which is local to the current device.
         /// </summary>
         public abstract IDirectory LocalStorage { get; }
 
         /// <summary>
-        /// A folder representing storage which may be synced with other devices for the same user
+        /// A folder representing storage which may be synced with other devices for the same user.
         /// </summary>
         public abstract IDirectory RoamingStorage { get; }
 

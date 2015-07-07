@@ -47,7 +47,8 @@ namespace UnifiedStorage
         /// <param name="accessOption">Specifies whether the file should be opened in read-only or read/write mode</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>A <see cref="Stream"/> which can be used to read from or write to the file</returns>
-        Task<Stream> OpenAsync(FileAccessOption accessOption, CancellationToken cancellationToken = default(CancellationToken));
+        Task<Stream> OpenAsync(FileAccessOption accessOption,
+            CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Deletes the file
@@ -67,7 +68,8 @@ namespace UnifiedStorage
         /// <returns>
         /// A task which will complete after the file is renamed.
         /// </returns>
-        Task<IFile> RenameAsync(string newName, CollisionOption collisionOption = CollisionOption.FailIfExists, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IFile> RenameAsync(string newName, CollisionOption collisionOption = CollisionOption.FailIfExists,
+            CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Moves a file.
@@ -76,7 +78,8 @@ namespace UnifiedStorage
         /// <param name="collisionOption">How to deal with collisions with existing files.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>A task which will complete after the file is moved.</returns>
-        Task<IFile> MoveAsync(string newPath, CollisionOption collisionOption = CollisionOption.ReplaceExisting, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IFile> MoveAsync(string newPath, CollisionOption collisionOption = CollisionOption.ReplaceExisting,
+            CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Copies the file to the new location.
@@ -85,7 +88,8 @@ namespace UnifiedStorage
         /// <param name="collisionOption">How to deal with collisions with existing files.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>A task which will complete after the file is moved.</returns>
-        Task<IFile> CopyAsync(string newPath, CollisionOption collisionOption = CollisionOption.ReplaceExisting, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IFile> CopyAsync(string newPath, CollisionOption collisionOption = CollisionOption.ReplaceExisting,
+            CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Checks if the current file exists.
