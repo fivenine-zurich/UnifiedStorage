@@ -9,6 +9,8 @@
     <Import_RootNamespace>UnifiedStorage.WindowsStorage</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\AsyncOperationExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\CollisionOptionExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)WindowsStorageDirectory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)WindowsStorageFile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FileSystem.cs" />

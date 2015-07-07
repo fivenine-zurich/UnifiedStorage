@@ -22,5 +22,7 @@
         /// the operation.
         /// </summary>
         FailIfExists = 2,
+
+        OpenIfExists = 3,
     }
 }

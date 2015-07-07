@@ -31,7 +31,7 @@ namespace UnifiedStorage.Extensions
                 SynchronizationContext.Current != null ? TaskScheduler.Default : null,
                 cancellationToken);
         }
-
+        
         /// <summary>
         /// An awaitable task scheduler.
         /// </summary>

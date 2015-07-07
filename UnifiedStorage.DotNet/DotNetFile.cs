@@ -14,17 +14,15 @@ namespace UnifiedStorage.DotNet
     internal class DotNetFile : IFile
     {
         private string _path;
-        private readonly string _name;
 
         public DotNetFile(string path)
         {
             _path = path;
-            _name = System.IO.Path.GetFileName(path);
         }
 
         public string Name
         {
-            get { return _name; }
+            get { return System.IO.Path.GetFileName(_path); }
         }
 
         public string Extension

@@ -9,6 +9,7 @@ namespace UnifiedStorage
         /// A folder representing storage which is local to the current device
         /// </summary>
         IDirectory LocalStorage { get; }
+
         /// <summary>
         /// A folder representing storage which may be synced with other devices for the same user
         /// </summary>
@@ -22,10 +23,28 @@ namespace UnifiedStorage
         /// </value>
         IDirectory TemporaryStorage { get; }
 
+        /// <summary>
+        /// Creates the path object from the given <c>string</c>.
+        /// </summary>
+        /// <param name="path">The path to create.</param>
+        /// <returns>A new instance of a <see cref="IPath"/>.</returns>
         IPath CreatePath(string path);
 
-        Task<IDirectory> GetDirectoryAsync(string path, CancellationToken cancellationToken = default(CancellationToken));
-        
-        Task<IFile> GetFileAsync(string path, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Gets a file, given its path.
+        /// </summary>
+        /// <param name="path">The path to a file, as returned from the <see cref="IFile.Path"/> property.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>A file for the given path.</returns>
+        Task<IFile> GetFileFromPathAsync(string path, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Gets a folder, given its path.
+        /// </summary>
+        /// <param name="path">The path to a directory, as returned from the <see cref="IDirectory.Path"/> property.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>A folder for the specified path.</returns>
+        Task<IDirectory> GetFolderFromPathAsync(string path,
+            CancellationToken cancellationToken = default(CancellationToken));
     }
 }

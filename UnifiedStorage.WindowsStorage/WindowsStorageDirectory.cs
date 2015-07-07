@@ -11,10 +11,16 @@ namespace UnifiedStorage.WindowsStorage
     public class WindowsStorageDirectory : IDirectory
     {
         private readonly IStorageFolder _storage;
+        private string path;
 
         public WindowsStorageDirectory(IStorageFolder storage)
         {
             _storage = storage;
+        }
+
+        public WindowsStorageDirectory(string path)
+        {
+            this.path = path;
         }
 
         public string Name

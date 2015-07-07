@@ -5,6 +5,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using UnifiedStorage.Extensions;
 
+// ReSharper disable ConvertToAutoProperty
+// ReSharper disable UseNameofExpression
+// ReSharper disable UseStringInterpolation
+// ReSharper disable ConvertPropertyToExpressionBody
+
 namespace UnifiedStorage.DotNet
 {
     internal class DotNetDirectory : IDirectory
@@ -28,10 +33,58 @@ namespace UnifiedStorage.DotNet
             get { return _path; }
         }
 
-        public Task<IFile> CreateFileAsync(string desiredName, CollisionOption option,
+        public async Task<IFile> CreateFileAsync(string desiredName, CollisionOption option,
             CancellationToken cancellationToken = new CancellationToken())
         {
-            throw new NotImplementedException();
+            await AwaitExtensions.SwitchOffMainThreadAsync(cancellationToken);
+
+            string nameToUse = desiredName;
+            string newPath = System.IO.Path.Combine(Path, nameToUse);
+
+            if (File.Exists(newPath))
+            {
+                switch (option)
+                {
+                    case CollisionOption.GenerateUniqueName:
+                    {
+                        string desiredRoot = System.IO.Path.GetFileNameWithoutExtension(desiredName);
+                        string desiredExtension = System.IO.Path.GetExtension(desiredName);
+                        for (int num = 1; File.Exists(newPath); num++)
+                        {
+                            cancellationToken.ThrowIfCancellationRequested();
+                            nameToUse = string.Format("{0} ({1}).{2}", desiredRoot, num, desiredExtension);
+                            newPath = System.IO.Path.Combine(Path, nameToUse);
+                        }
+
+                        break;
+                    }
+                    case CollisionOption.ReplaceExisting:
+                    {
+                        File.Delete(newPath);
+                        CreateFile(newPath);
+
+                        break;
+                    }
+                    case CollisionOption.FailIfExists:
+                        throw new Exceptions.IOException("Cannot create file, it already exists");
+
+                    case CollisionOption.OpenIfExists:
+                    {
+                        // Do nothing
+                        break;
+                    }
+
+                    default:
+                        throw new ArgumentOutOfRangeException("option", option, null);
+                }
+            }
+            else
+            {
+                //	Create file
+                CreateFile(newPath);
+            }
+
+            return new DotNetFile(newPath);
         }
 
         public Task<IFile> GetFileAsync(string name, CancellationToken cancellationToken = new CancellationToken())
@@ -64,6 +117,13 @@ namespace UnifiedStorage.DotNet
         {
             await AwaitExtensions.SwitchOffMainThreadAsync(cancellationToken);
             Directory.Delete(_path, true);
+        }
+
+        private void CreateFile(string filePath)
+        {
+            using (var stream = File.Create(filePath))
+            {
+            }
         }
     }
 }

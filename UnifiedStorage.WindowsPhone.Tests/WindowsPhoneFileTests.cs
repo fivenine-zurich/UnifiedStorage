@@ -23,7 +23,7 @@ namespace UnifiedStorage.WindowsPhone.Tests
         {
             var path = new WindowsStoragePath(ApplicationData.Current.LocalFolder.Path);
 
-            var file = await _filesystem.GetFileAsync(path.Combine("Test.txt"));
+            var file = await _filesystem.GetFileFromPathAsync(path.Combine("Test.txt"));
             file.Should().NotBeNull();
         }
 
@@ -33,7 +33,7 @@ namespace UnifiedStorage.WindowsPhone.Tests
             var filePath = _filesystem.CreatePath(_filesystem.LocalStorage.Path);
             var filename = Guid.NewGuid() + ".txt";
 
-            var file = await _filesystem.GetFileAsync(filePath.Combine(filename));
+            var file = await _filesystem.GetFileFromPathAsync(filePath.Combine(filename));
             file.Should().NotBeNull();
             file.Name.Should().Be(filename);
         }
@@ -45,7 +45,7 @@ namespace UnifiedStorage.WindowsPhone.Tests
         {
             var filePath = _filesystem.CreatePath(_filesystem.LocalStorage.Path);
 
-            var file = await _filesystem.GetFileAsync(filePath.Combine(filename));
+            var file = await _filesystem.GetFileFromPathAsync(filePath.Combine(filename));
             file.Should().NotBeNull();
             file.Extension.Should().Be(expectedExtension);
         }
@@ -55,7 +55,7 @@ namespace UnifiedStorage.WindowsPhone.Tests
         {
             var filePath = _filesystem.CreatePath(_filesystem.LocalStorage.Path);
 
-            var file = await _filesystem.GetFileAsync(filePath.Combine(Guid.NewGuid() + ".txt"));
+            var file = await _filesystem.GetFileFromPathAsync(filePath.Combine(Guid.NewGuid() + ".txt"));
             file.Should().NotBeNull();
             var result = await file.ExistsAsync();
 

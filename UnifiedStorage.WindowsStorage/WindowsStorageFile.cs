@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Windows.Storage;
 using UnifiedStorage.Extensions;
+using UnifiedStorage.WindowsStorage.Extensions;
 
 // ReSharper disable UseStringInterpolation
 // ReSharper disable ConvertPropertyToExpressionBody
@@ -131,7 +132,7 @@ namespace UnifiedStorage.WindowsStorage
 
             try
             {
-                await _storageFile.MoveAsync(newFolder, newName, (NameCollisionOption)collisionOption)
+                await _storageFile.MoveAsync(newFolder, newName, collisionOption.ToNameCollisionOption())
                     .AsTask(cancellationToken)
                     .ConfigureAwait(false);
             }
@@ -146,7 +147,7 @@ namespace UnifiedStorage.WindowsStorage
                     string.Format("Could not move the file {0} to {1}: {2}", _path, newPath, ex.Message), ex);
             }
 
-            _storageFile = await StorageFile.GetFileFromPathAsync(_path)
+            _storageFile = await StorageFile.GetFileFromPathAsync(newPath)
                     .AsTask(cancellationToken)
                     .ConfigureAwait(false);
 
@@ -180,23 +181,8 @@ namespace UnifiedStorage.WindowsStorage
 
         public async Task<bool> ExistsAsync(CancellationToken cancellationToken)
         {
-            if (_storageFile != null)
-            {
-                return true;
-            }
-
-            try
-            {
-                _storageFile = await StorageFile.GetFileFromPathAsync(_path)
-                    .AsTask(cancellationToken)
-                    .ConfigureAwait(false);
-            }
-            catch (Exception)
-            {
-                _storageFile = null;
-            }
-
-            return _storageFile != null;
+            return await WindowsStoragePath.ItemExistsAsync(_path, Name, cancellationToken) ==
+                   WindowsStoragePath.ExistenceResult.FileExists;
         }
 
         protected virtual async Task EnsureExistsAsync(CancellationToken cancellationToken)
