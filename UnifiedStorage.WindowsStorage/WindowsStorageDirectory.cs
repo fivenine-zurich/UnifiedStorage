@@ -8,7 +8,7 @@ using Windows.Storage;
 namespace UnifiedStorage.WindowsStorage
 {
     [DebuggerDisplay("Name = {Name}")]
-    public class WindowsStorageDirectory : IDirectory
+    internal class WindowsStorageDirectory : IDirectory
     {
         private readonly IStorageFolder _storage;
         private string path;

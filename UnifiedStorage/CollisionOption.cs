@@ -23,6 +23,9 @@
         /// </summary>
         FailIfExists = 2,
 
+        /// <summary>
+        /// Opens the file if it already exists.
+        /// </summary>
         OpenIfExists = 3,
     }
 }

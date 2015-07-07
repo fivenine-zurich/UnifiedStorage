@@ -14,7 +14,7 @@ using UnifiedStorage.WindowsStorage.Extensions;
 namespace UnifiedStorage.WindowsStorage
 {
     [DebuggerDisplay("Name = {Name}")]
-    public class WindowsStorageFile : IFile
+    internal class WindowsStorageFile : IFile
     {
         /// <summary>
         /// The HRESULT on a System.Exception thrown when a file collision occurs.

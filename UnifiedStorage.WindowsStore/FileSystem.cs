@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace UnifiedStorage.WindowsStore
 {
-    public class Class1
+    /// <summary>
+    /// A <see cref="IFileSystem"/> implementation for the Windows Storage API.
+    /// </summary>
+    public class FileSystem
     {
     }
 }

@@ -1,5 +1,8 @@
 ﻿namespace UnifiedStorage
 {
+    /// <summary>
+    /// Various options for accessing files.
+    /// </summary>
     public enum FileAccessOption
     {
         /// <summary>

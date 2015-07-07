@@ -3,6 +3,9 @@ using UnifiedStorage.DotNet;
 
 namespace UnifiedStorage.Desktop
 {
+    /// <summary>
+    /// A <see cref="IFileSystem"/> implementation for desktop applications using the classic .NET System.IO API.
+    /// </summary>
     public class FileSystem : DotNetFileSystem
     {
         /// <summary>

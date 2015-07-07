@@ -9,6 +9,9 @@ using Windows.Storage;
 
 namespace UnifiedStorage.WindowsStorage
 {
+    /// <summary>
+    /// A <see cref="IFileSystem"/> implementation for the Windows Storage API.
+    /// </summary>
     public class FileSystem : IFileSystem
     {
         private ApplicationData _appData;

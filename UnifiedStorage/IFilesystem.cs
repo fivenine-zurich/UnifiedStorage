@@ -3,6 +3,10 @@ using System.Threading.Tasks;
 
 namespace UnifiedStorage
 {
+    /// <summary>
+    /// Defines an abstract view of a filesystem. The <see cref="IFileSystem"/> implementation is the main
+    /// entry point for working with the Unified file API.
+    /// </summary>
     public interface IFileSystem
     {
         /// <summary>
