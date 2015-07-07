@@ -1,14 +1,19 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using UnifiedStorage.Extensions;
 
+// ReSharper disable UseNameofExpression
+// ReSharper disable UseStringInterpolation
+// ReSharper disable ConvertPropertyToExpressionBody
+
 namespace UnifiedStorage.DotNet
 {
     internal class DotNetFile : IFile
     {
-        private readonly string _path;
+        private string _path;
         private readonly string _name;
 
         public DotNetFile(string path)
@@ -48,10 +53,15 @@ namespace UnifiedStorage.DotNet
             switch (accessOption)
             {
                 case FileAccessOption.ReadOnly:
+                {
+                    // Make sure the source file exists
+                    EnsureExists();
+
                     return File.OpenRead(Path);
+                }
 
                 case FileAccessOption.ReadWrite:
-                    return File.Open(Path, FileMode.Open, FileAccess.ReadWrite);
+                    return File.Open(Path, FileMode.OpenOrCreate, FileAccess.ReadWrite);
 
                 default:
                     throw new ArgumentOutOfRangeException("accessOption", accessOption, null);
@@ -60,39 +70,104 @@ namespace UnifiedStorage.DotNet
 
         public async Task DeleteAsync(CancellationToken cancellationToken)
         {
+            // Make sure the source file exists
+            EnsureExists();
+
             await AwaitExtensions.SwitchOffMainThreadAsync(cancellationToken);
-
-            if (!File.Exists(Path))
-            {
-                throw new Exceptions.FileNotFoundException(this);
-            }
-
+            
             File.Delete(Path);
         }
 
         public Task<IFile> RenameAsync(string newName, CollisionOption collisionOption = CollisionOption.FailIfExists,
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            throw new NotImplementedException();
+            // Make sure the source file exists
+            EnsureExists();
+
+            var directoryPath = System.IO.Path.GetDirectoryName(_path);
+            if (directoryPath == null)
+            {
+                throw new ArgumentException("newName");
+            }
+
+            return MoveAsync( System.IO.Path.Combine(directoryPath, newName), collisionOption, cancellationToken );
         }
 
-        public Task<IFile> MoveAsync(string newPath, CollisionOption collisionOption = CollisionOption.ReplaceExisting,
+        public async Task<IFile> MoveAsync(string newPath, CollisionOption collisionOption = CollisionOption.ReplaceExisting,
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            throw new NotImplementedException();
+            // Make sure the source file exists
+            EnsureExists();
+
+            await AwaitExtensions.SwitchOffMainThreadAsync(cancellationToken);
+
+            string newDirectory = System.IO.Path.GetDirectoryName(newPath);
+            string newName = System.IO.Path.GetFileName(newPath);
+
+            for (int counter = 1;; counter++)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                string candidateName = newName;
+                if (counter > 1)
+                {
+                    candidateName = string.Format(
+                        CultureInfo.InvariantCulture,
+                        "{0} ({1}){2}",
+                        System.IO.Path.GetFileNameWithoutExtension(newName),
+                        counter,
+                        System.IO.Path.GetExtension(newName));
+                }
+
+                string candidatePath = System.IO.Path.Combine(newDirectory, candidateName);
+
+                if (File.Exists(candidatePath))
+                {
+                    switch (collisionOption)
+                    {
+                        case CollisionOption.FailIfExists:
+                        {
+                            throw new IOException("File already exists.");
+                        }
+
+                        case CollisionOption.GenerateUniqueName:
+                        {
+                            // Continue with the loop and generate a new name
+                            continue;
+                        }
+
+                        case CollisionOption.ReplaceExisting:
+                        {
+                            File.Delete(candidatePath);
+                            break;
+                        }
+                        default:
+                        {
+                            throw new ArgumentOutOfRangeException("collisionOption", collisionOption, null);
+                        }
+                    }
+                }
+
+                File.Move(_path, candidatePath);
+
+                _path = candidatePath;
+                return this;
+            }
         }
 
         public async Task<IFile> CopyAsync(string newPath, CollisionOption collisionOption = CollisionOption.ReplaceExisting,
             CancellationToken cancellationToken = default(CancellationToken))
         {
+            // Make sure the source file exists
+            EnsureExists();
+
             await AwaitExtensions.SwitchOffMainThreadAsync(cancellationToken);
 
             using (Stream source = File.Open(_path, FileMode.Open))
             {
-                const int bufferSize = 4084;
+                const int bufferSize = 4096;
                 using (Stream destination = File.Create(newPath, bufferSize, FileOptions.Asynchronous))
                 {
-                    await source.CopyToAsync(destination);
+                    await source.CopyToAsync(destination, bufferSize, cancellationToken);
                 }
             }
 
@@ -103,6 +178,14 @@ namespace UnifiedStorage.DotNet
         {
             await AwaitExtensions.SwitchOffMainThreadAsync(cancellationToken);
             return File.Exists(_path);
+        }
+
+        private void EnsureExists()
+        {
+            if (!File.Exists(_path))
+            {
+                throw new Exceptions.FileNotFoundException(this);
+            }
         }
     }
 }
