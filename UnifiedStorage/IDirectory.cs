@@ -66,7 +66,7 @@ namespace UnifiedStorage
         /// <param name="option">Specifies how to behave if the specified folder already exists</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>The newly created folder</returns>
-        Task<IDirectory> CreateFolderAsync(string desiredName, CollisionOption option, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDirectory> CreateDirectoryAsync(string desiredName, CollisionOption option, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Gets a subfolder in this folder
@@ -74,22 +74,21 @@ namespace UnifiedStorage
         /// <param name="name">The name of the folder to get</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>The requested folder, or null if it does not exist</returns>
-        Task<IDirectory> GetFolderAsync(string name, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IDirectory> GetDirectoryAsync(string name, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Gets a list of subfolders in this folder
         /// </summary>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>A list of subfolders in the folder</returns>
-        Task<IList<IDirectory>> GetFoldersAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<IDirectory>> GetDirectoriesAsync(CancellationToken cancellationToken = default(CancellationToken));
 
-        ///// <summary>
-        ///// Checks whether a folder or file exists at the given location.
-        ///// </summary>
-        ///// <param name="name">The name of the file or folder to check for.</param>
-        ///// <param name="cancellationToken">The cancellation token.</param>
-        ///// <returns>A task whose result is the result of the existence check.</returns>
-        //Task<ExistenceCheckResult> CheckExistsAsync(string name, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Checks if the current diectory exists.
+        /// </summary>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns><c>True</c> if the directory exists; otherwise <c>false</c>.</returns>
+        Task<bool> ExistsAsync(CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Deletes this folder and all of its contents

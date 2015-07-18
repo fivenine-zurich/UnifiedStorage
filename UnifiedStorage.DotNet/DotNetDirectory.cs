@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -13,6 +14,7 @@ using UnifiedStorage.Extensions;
 
 namespace UnifiedStorage.DotNet
 {
+    [DebuggerDisplay("Name = {Name}")]
     internal class DotNetDirectory : IDirectory
     {
         private readonly string _path;
@@ -35,7 +37,7 @@ namespace UnifiedStorage.DotNet
         }
 
         public async Task<IFile> CreateFileAsync(string desiredName, CollisionOption option,
-            CancellationToken cancellationToken = new CancellationToken())
+            CancellationToken cancellationToken = default(CancellationToken))
         {
             await AwaitExtensions.SwitchOffMainThreadAsync(cancellationToken);
 
@@ -88,7 +90,7 @@ namespace UnifiedStorage.DotNet
             return new DotNetFile(newPath);
         }
 
-        public async Task<IFile> GetFileAsync(string name, CancellationToken cancellationToken = new CancellationToken())
+        public async Task<IFile> GetFileAsync(string name, CancellationToken cancellationToken = default(CancellationToken))
         {
             await AwaitExtensions.SwitchOffMainThreadAsync(cancellationToken);
 
@@ -96,7 +98,7 @@ namespace UnifiedStorage.DotNet
             return new DotNetFile(path);
         }
 
-        public async Task<IList<IFile>> GetFilesAsync(CancellationToken cancellationToken = new CancellationToken())
+        public async Task<IList<IFile>> GetFilesAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
             await AwaitExtensions.SwitchOffMainThreadAsync(cancellationToken);
 
@@ -110,7 +112,7 @@ namespace UnifiedStorage.DotNet
             return files;
         }
 
-        public async Task<IList<IFile>> GetFilesAsync(string searchPattern, CancellationToken cancellationToken = new CancellationToken())
+        public async Task<IList<IFile>> GetFilesAsync(string searchPattern, CancellationToken cancellationToken = default(CancellationToken))
         {
             await AwaitExtensions.SwitchOffMainThreadAsync(cancellationToken);
 
@@ -124,8 +126,8 @@ namespace UnifiedStorage.DotNet
             return files;
         }
 
-        public async Task<IDirectory> CreateFolderAsync(string desiredName, CollisionOption option,
-            CancellationToken cancellationToken = new CancellationToken())
+        public async Task<IDirectory> CreateDirectoryAsync(string desiredName, CollisionOption option,
+            CancellationToken cancellationToken = default(CancellationToken))
         {
             await AwaitExtensions.SwitchOffMainThreadAsync(cancellationToken);
 
@@ -178,7 +180,7 @@ namespace UnifiedStorage.DotNet
             return new DotNetDirectory(newPath);
         }
 
-        public async Task<IDirectory> GetFolderAsync(string name, CancellationToken cancellationToken = new CancellationToken())
+        public async Task<IDirectory> GetDirectoryAsync(string name, CancellationToken cancellationToken = default(CancellationToken))
         {
             await AwaitExtensions.SwitchOffMainThreadAsync(cancellationToken);
 
@@ -186,7 +188,7 @@ namespace UnifiedStorage.DotNet
             return new DotNetDirectory(path);
         }
 
-        public async Task<IList<IDirectory>> GetFoldersAsync(CancellationToken cancellationToken = new CancellationToken())
+        public async Task<IList<IDirectory>> GetDirectoriesAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
             await AwaitExtensions.SwitchOffMainThreadAsync(cancellationToken);
             EnsureExists();
@@ -197,6 +199,12 @@ namespace UnifiedStorage.DotNet
                 .AsReadOnly();
 
             return directories;
+        }
+
+        public async Task<bool> ExistsAsync(CancellationToken cancellationToken = default(CancellationToken))
+        {
+            await AwaitExtensions.SwitchOffMainThreadAsync(cancellationToken);
+            return Directory.Exists(Path);
         }
 
         public async Task DeleteAsync(CancellationToken cancellationToken)

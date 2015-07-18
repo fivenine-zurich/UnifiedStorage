@@ -43,12 +43,12 @@ namespace UnifiedStorage
         Task<IFile> GetFileFromPathAsync(string path, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
-        /// Gets a folder, given its path.
+        /// Gets a directory object from the given path.
         /// </summary>
         /// <param name="path">The path to a directory, as returned from the <see cref="IDirectory.Path"/> property.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>A folder for the specified path.</returns>
-        Task<IDirectory> GetFolderFromPathAsync(string path,
+        Task<IDirectory> GetDirectoryFromPathAsync(string path,
             CancellationToken cancellationToken = default(CancellationToken));
     }
 }

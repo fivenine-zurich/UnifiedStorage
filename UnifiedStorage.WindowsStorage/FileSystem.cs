@@ -90,7 +90,7 @@ namespace UnifiedStorage.WindowsStorage
         /// <param name="path">The path to a directory, as returned from the <see cref="IDirectory.Path"/> property.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>A folder for the specified path.</returns>
-        public async Task<IDirectory> GetFolderFromPathAsync(string path, CancellationToken cancellationToken = new CancellationToken())
+        public async Task<IDirectory> GetDirectoryFromPathAsync(string path, CancellationToken cancellationToken = new CancellationToken())
         {
             StorageFolder storageFolder;
             try

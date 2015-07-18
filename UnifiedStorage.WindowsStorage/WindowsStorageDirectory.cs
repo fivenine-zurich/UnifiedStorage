@@ -54,18 +54,23 @@ namespace UnifiedStorage.WindowsStorage
             throw new System.NotImplementedException();
         }
 
-        public Task<IDirectory> CreateFolderAsync(string desiredName, CollisionOption option,
+        public Task<IDirectory> CreateDirectoryAsync(string desiredName, CollisionOption option,
             CancellationToken cancellationToken = new CancellationToken())
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<IDirectory> GetFolderAsync(string name, CancellationToken cancellationToken = new CancellationToken())
+        public Task<IDirectory> GetDirectoryAsync(string name, CancellationToken cancellationToken = new CancellationToken())
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<IList<IDirectory>> GetFoldersAsync(CancellationToken cancellationToken = new CancellationToken())
+        public Task<IList<IDirectory>> GetDirectoriesAsync(CancellationToken cancellationToken = new CancellationToken())
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<bool> ExistsAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             throw new System.NotImplementedException();
         }
