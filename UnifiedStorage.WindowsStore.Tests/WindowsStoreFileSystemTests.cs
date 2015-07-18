@@ -2,12 +2,12 @@
 using UnifiedStorage.Shared.Tests;
 using UnifiedStorage.WindowsStorage;
 
-namespace UnifiedStorage.WindowsPhone.Tests
+namespace UnifiedStorage.WindowsStore.Tests
 {
     [TestClass]
-    public class WindowsPhoneFileTests : FileTests
+    public class WindowsStoreFileSystemTests : FileSystemTests
     {
-        public WindowsPhoneFileTests()
+        public WindowsStoreFileSystemTests()
             : base(new FileSystem())
         {
         }

@@ -2,7 +2,12 @@
 using System.Diagnostics;
 using System.Threading.Tasks;
 using FluentAssertions;
+
+#if MSTEST
+using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+#else
 using NUnit.Framework;
+#endif
 
 // ReSharper disable CheckNamespace
 namespace UnifiedStorage.Shared.Tests
@@ -16,7 +21,11 @@ namespace UnifiedStorage.Shared.Tests
             Filesystem = filesystem;
         }
 
+#if MSTEST
+        [TestMethod]
+#else
         [Test]
+#endif
         public virtual async Task Verify_that_a_new_file_class_can_be_created_without_the_need_for_the_file_to_exist()
         {
             var filePath = Filesystem.CreatePath(Filesystem.LocalStorage.Path);
@@ -27,7 +36,11 @@ namespace UnifiedStorage.Shared.Tests
             Debug.WriteLine(file.Name);
         }
 
+#if MSTEST
+        [TestMethod]
+#else
         [Test]
+#endif
         public virtual async Task Verify_that_Name_returns_the_filename_including_its_extension()
         {
             var filePath = Filesystem.CreatePath(Filesystem.LocalStorage.Path);
@@ -37,9 +50,14 @@ namespace UnifiedStorage.Shared.Tests
             file.Should().NotBeNull();
             file.Name.Should().Be(filename);
         }
-
+#if MSTEST
+        [DataTestMethod]
+        [DataRow("test.txt", ".txt")]
+        [DataRow(".gitignore", ".gitignore")]
+#else
         [TestCase("test.txt", ".txt")]
         [TestCase(".gitignore", ".gitignore")]
+#endif
         public virtual async Task Verify_that_Extension_returns_the_files_extension(string filename,
             string expectedExtension)
         {
@@ -50,7 +68,11 @@ namespace UnifiedStorage.Shared.Tests
             file.Extension.Should().Be(expectedExtension);
         }
 
+#if MSTEST
+        [TestMethod]
+#else
         [Test]
+#endif
         public virtual async Task Verify_that_ExistsAsync_returns_false_for_a_nonexistent_file()
         {
             var filePath = Filesystem.CreatePath(Filesystem.LocalStorage.Path);
@@ -62,7 +84,11 @@ namespace UnifiedStorage.Shared.Tests
             result.Should().BeFalse();
         }
 
+#if MSTEST
+        [TestMethod]
+#else
         [Test]
+#endif
         public virtual async Task Verify_that_ExistsAsync_returns_true_for_an_existing_file()
         {
             var filename = Helper.CreateUniqueFileName();
@@ -75,7 +101,11 @@ namespace UnifiedStorage.Shared.Tests
             await sourceFile.DeleteAsync();
         }
 
+#if MSTEST
+        [TestMethod]
+#else
         [Test]
+#endif
         public virtual async Task Verify_that_MoveAsync_succeeds()
         {
             var filename = Helper.CreateUniqueFileName();
@@ -94,7 +124,11 @@ namespace UnifiedStorage.Shared.Tests
             await file.DeleteAsync();
         }
 
+#if MSTEST
+        [TestMethod]
+#else
         [Test]
+#endif
         public virtual async Task Verify_that_MoveAsync_succeeds_and_replaces_the_destination_if_ReplaceExisting_is_specified()
         {
             var filename = Helper.CreateUniqueFileName();
@@ -115,7 +149,11 @@ namespace UnifiedStorage.Shared.Tests
             await file.DeleteAsync();
         }
 
+#if MSTEST
+        [TestMethod]
+#else
         [Test]
+#endif
         public virtual async Task Verify_that_MoveAsync_succeeds_and_a_new_name_is_generated_if_specified()
         {
             var filename = Helper.CreateUniqueFileName();
@@ -138,7 +176,11 @@ namespace UnifiedStorage.Shared.Tests
             await newFile.DeleteAsync();
         }
 
+#if MSTEST
+        [TestMethod]
+#else
         [Test]
+#endif
         public virtual async Task Verify_that_a_MoveAsync_throws_an_exception_if_the_destination_file_exists_and_FailIfExists_is_specified()
         {
             var filename = Helper.CreateUniqueFileName();
@@ -160,7 +202,11 @@ namespace UnifiedStorage.Shared.Tests
             await sourceFile.DeleteAsync();
         }
 
+#if MSTEST
+        [TestMethod]
+#else
         [Test]
+#endif
         public virtual async Task Verify_that_DeleteAsync_deletes_an_existing_file()
         {
             var filename = Helper.CreateUniqueFileName();
@@ -174,7 +220,11 @@ namespace UnifiedStorage.Shared.Tests
             (await sourceFile.ExistsAsync()).Should().BeFalse();
         }
 
+#if MSTEST
+        [TestMethod]
+#else
         [Test]
+#endif
         public virtual async Task Verify_that_DeleteAsync_throws_an_exception_if_the_file_does_not_exist()
         {
             var filename = Helper.CreateUniqueFileName();
@@ -189,7 +239,11 @@ namespace UnifiedStorage.Shared.Tests
             act.ShouldThrow<Exceptions.FileNotFoundException>();
         }
 
+#if MSTEST
+        [TestMethod]
+#else
         [Test]
+#endif
         public virtual async Task Verify_that_RenameAsync_succeeds()
         {
             var filename = Helper.CreateUniqueFileName();
@@ -206,7 +260,11 @@ namespace UnifiedStorage.Shared.Tests
             await file.DeleteAsync();
         }
 
+#if MSTEST
+        [TestMethod]
+#else
         [Test]
+#endif
         public virtual async Task Verify_that_RenameAsync_succeeds_and_replaces_the_destination_if_ReplaceExisting_is_specified()
         {
             var filename = Helper.CreateUniqueFileName();
@@ -225,7 +283,11 @@ namespace UnifiedStorage.Shared.Tests
             await file.DeleteAsync();
         }
 
+#if MSTEST
+        [TestMethod]
+#else
         [Test]
+#endif
         public virtual async Task Verify_that_RenameAsync_succeeds_and_a_new_name_is_generated_if_specified()
         {
             var filename = Helper.CreateUniqueFileName();
@@ -246,7 +308,11 @@ namespace UnifiedStorage.Shared.Tests
             await newFile.DeleteAsync();
         }
 
+#if MSTEST
+        [TestMethod]
+#else
         [Test]
+#endif
         public virtual async Task Verify_that_a_RenameAsync_throws_an_exception_if_the_destination_file_exists_and_FailIfExists_is_specified()
         {
             var filename = Helper.CreateUniqueFileName();

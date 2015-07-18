@@ -1,7 +1,8 @@
 # Unified Storage
 
 Unified Storage provides a unified file IO API for various platforms.
-It is loosely based on the [PCLStorage](https://github.com/dsplaisted/PCLStorage) project.
+It is based on the excellent [PCLStorage](https://github.com/dsplaisted/PCLStorage) library. UnifiedStorage tries to make testing your applications 
+easier by providing interfaces for all classes and not using static factories.
 
 ## Supported Platforms
 Currently the following platforms are supported:

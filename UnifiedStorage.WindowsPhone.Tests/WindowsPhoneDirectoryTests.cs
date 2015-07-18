@@ -5,9 +5,9 @@ using UnifiedStorage.WindowsStorage;
 namespace UnifiedStorage.WindowsPhone.Tests
 {
     [TestClass]
-    public class WindowsPhoneFileTests : FileTests
+    public class WindowsPhoneDirectoryTests : DirectoryTests
     {
-        public WindowsPhoneFileTests()
+        public WindowsPhoneDirectoryTests()
             : base(new FileSystem())
         {
         }
