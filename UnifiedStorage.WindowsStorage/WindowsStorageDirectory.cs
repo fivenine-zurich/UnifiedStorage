@@ -49,6 +49,11 @@ namespace UnifiedStorage.WindowsStorage
             throw new System.NotImplementedException();
         }
 
+        public Task<IList<IFile>> GetFilesAsync(string searchPattern, CancellationToken cancellationToken = new CancellationToken())
+        {
+            throw new System.NotImplementedException();
+        }
+
         public Task<IDirectory> CreateFolderAsync(string desiredName, CollisionOption option,
             CancellationToken cancellationToken = new CancellationToken())
         {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using UnifiedStorage.Extensions;
@@ -87,30 +88,115 @@ namespace UnifiedStorage.DotNet
             return new DotNetFile(newPath);
         }
 
-        public Task<IFile> GetFileAsync(string name, CancellationToken cancellationToken = new CancellationToken())
+        public async Task<IFile> GetFileAsync(string name, CancellationToken cancellationToken = new CancellationToken())
         {
-            throw new NotImplementedException();
+            await AwaitExtensions.SwitchOffMainThreadAsync(cancellationToken);
+
+            string path = System.IO.Path.Combine(Path, name);
+            return new DotNetFile(path);
         }
 
-        public Task<IList<IFile>> GetFilesAsync(CancellationToken cancellationToken = new CancellationToken())
+        public async Task<IList<IFile>> GetFilesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
-            throw new NotImplementedException();
+            await AwaitExtensions.SwitchOffMainThreadAsync(cancellationToken);
+
+            EnsureExists();
+
+            IList<IFile> files = Directory.GetFiles(Path)
+                .Select(f => new DotNetFile(f))
+                .ToList<IFile>()
+                .AsReadOnly();
+
+            return files;
         }
 
-        public Task<IDirectory> CreateFolderAsync(string desiredName, CollisionOption option,
+        public async Task<IList<IFile>> GetFilesAsync(string searchPattern, CancellationToken cancellationToken = new CancellationToken())
+        {
+            await AwaitExtensions.SwitchOffMainThreadAsync(cancellationToken);
+
+            EnsureExists();
+
+            IList<IFile> files = Directory.GetFiles(Path, searchPattern, SearchOption.TopDirectoryOnly)
+                .Select(f => new DotNetFile(f))
+                .ToList<IFile>()
+                .AsReadOnly();
+
+            return files;
+        }
+
+        public async Task<IDirectory> CreateFolderAsync(string desiredName, CollisionOption option,
             CancellationToken cancellationToken = new CancellationToken())
         {
-            throw new NotImplementedException();
+            await AwaitExtensions.SwitchOffMainThreadAsync(cancellationToken);
+
+            EnsureExists();
+
+            string nameToUse = desiredName;
+            string newPath = System.IO.Path.Combine(Path, nameToUse);
+            if (Directory.Exists(newPath))
+            {
+                switch (option)
+                {
+                    case CollisionOption.GenerateUniqueName:
+                    {
+                        for (int num = 2; Directory.Exists(newPath); num++)
+                        {
+                            cancellationToken.ThrowIfCancellationRequested();
+                            nameToUse = string.Format("{0} ({1})", desiredName, num);
+                            newPath = System.IO.Path.Combine(Path, nameToUse);
+                        }
+
+                        Directory.CreateDirectory(newPath);
+                        break;
+                    }
+
+                    case CollisionOption.ReplaceExisting:
+                    {
+                        Directory.Delete(newPath, true);
+                        Directory.CreateDirectory(newPath);
+                        break;
+                    }
+
+                    case CollisionOption.FailIfExists:
+                        throw new Exceptions.UnifiedIOException(string.Format("The directory {0} already exists",
+                            newPath));
+
+                    case CollisionOption.OpenIfExists:
+                    {
+                        // Do nothing...
+                        break;
+                    }
+                    default:
+                        throw new ArgumentOutOfRangeException("option", option, null);
+                }
+            }
+            else
+            {
+                Directory.CreateDirectory(newPath);
+            }
+
+            return new DotNetDirectory(newPath);
         }
 
-        public Task<IDirectory> GetFolderAsync(string name, CancellationToken cancellationToken = new CancellationToken())
+        public async Task<IDirectory> GetFolderAsync(string name, CancellationToken cancellationToken = new CancellationToken())
         {
-            throw new NotImplementedException();
+            await AwaitExtensions.SwitchOffMainThreadAsync(cancellationToken);
+
+            string path = System.IO.Path.Combine(Path, name);
+            return new DotNetDirectory(path);
         }
 
-        public Task<IList<IDirectory>> GetFoldersAsync(CancellationToken cancellationToken = new CancellationToken())
+        public async Task<IList<IDirectory>> GetFoldersAsync(CancellationToken cancellationToken = new CancellationToken())
         {
-            throw new NotImplementedException();
+            await AwaitExtensions.SwitchOffMainThreadAsync(cancellationToken);
+            EnsureExists();
+
+            IList<IDirectory> directories = Directory.GetDirectories(Path)
+                .Select(d => new DotNetDirectory(d))
+                .ToList<IDirectory>()
+                .AsReadOnly();
+
+            return directories;
         }
 
         public async Task DeleteAsync(CancellationToken cancellationToken)
@@ -123,6 +209,14 @@ namespace UnifiedStorage.DotNet
         {
             using (var stream = File.Create(filePath))
             {
+            }
+        }
+
+        private void EnsureExists()
+        {
+            if (!Directory.Exists(_path))
+            {
+                throw new Exceptions.DirectoryNotFoundException(this);
             }
         }
     }

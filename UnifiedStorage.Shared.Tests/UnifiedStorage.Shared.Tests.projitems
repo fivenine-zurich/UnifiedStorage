@@ -9,6 +9,7 @@
     <Import_RootNamespace>UnifiedStorage.Shared.Tests</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)DirectoryTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FileTests.cs" />
   </ItemGroup>
 </Project>

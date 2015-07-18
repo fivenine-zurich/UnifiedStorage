@@ -50,6 +50,16 @@ namespace UnifiedStorage
         Task<IList<IFile>> GetFilesAsync(CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
+        /// Gets a list of the files in this folder
+        /// </summary>
+        /// <param name="searchPattern">The file pattern.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>
+        /// A list of the files in the folder
+        /// </returns>
+        Task<IList<IFile>> GetFilesAsync(string searchPattern, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
         /// Creates a subfolder in this folder
         /// </summary>
         /// <param name="desiredName">The name of the folder to create</param>

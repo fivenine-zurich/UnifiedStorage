@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CollisionOption.cs" />
+    <Compile Include="Exceptions\DirectoryNotFoundException.cs" />
     <Compile Include="Exceptions\FileNotFoundException.cs" />
     <Compile Include="Exceptions\UnifiedIOException.cs" />
     <Compile Include="Exceptions\UnifiedStorageException.cs" />
