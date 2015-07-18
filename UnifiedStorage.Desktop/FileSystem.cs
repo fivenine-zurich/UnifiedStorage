@@ -21,7 +21,7 @@ namespace UnifiedStorage.Desktop
         }
 
         /// <summary>
-        /// A folder representing storage which may be synced with other devices for the same user.
+        /// A folder representing storage which may be synced or otherwise shared with other devices for the same user.
         /// </summary>
         public override IDirectory RoamingStorage
         {

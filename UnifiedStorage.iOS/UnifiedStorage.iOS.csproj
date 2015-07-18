@@ -36,6 +36,7 @@
     <DocumentationFile>..\bin\iOS\Release\UnifiedStorage.iOS.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="FileSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
