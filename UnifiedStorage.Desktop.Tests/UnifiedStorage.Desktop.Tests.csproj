@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DesktopDirectoryTests.cs" />
+    <Compile Include="DesktopFileSystemTests.cs" />
     <Compile Include="DesktopFileTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
