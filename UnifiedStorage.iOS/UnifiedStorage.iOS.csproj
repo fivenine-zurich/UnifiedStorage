@@ -16,24 +16,24 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\bin\iOS\Debug\</OutputPath>
+    <OutputPath>..\bin\Xamarin.iOS10\</OutputPath>
     <DefineConstants>DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <MtouchDebug>true</MtouchDebug>
     <CodesignKey>iPhone Developer</CodesignKey>
-    <DocumentationFile>..\bin\iOS\Debug\UnifiedStorage.iOS.XML</DocumentationFile>
+    <DocumentationFile>..\bin\Xamarin.iOS10\UnifiedStorage.iOS.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\bin\iOS\Release\</OutputPath>
+    <OutputPath>..\bin\Xamarin.iOS10\</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <CodesignKey>iPhone Developer</CodesignKey>
-    <DocumentationFile>..\bin\iOS\Release\UnifiedStorage.iOS.XML</DocumentationFile>
+    <DocumentationFile>..\bin\Xamarin.iOS10\UnifiedStorage.iOS.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="FileSystem.cs" />
