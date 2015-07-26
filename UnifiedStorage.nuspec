@@ -3,13 +3,13 @@
   <metadata minClientVersion="2.8.1">
     <id>UnifiedStorage</id>
     <version>0.0.0.1</version>
-    <title>Unified Storage, simple universal storage API</title>
+    <title>UnifiedStorage</title>
     <authors>Tobias Herrmann, Jan Humbel, Michael Höhn</authors>
     <owners>fivenine digital</owners>
     <copyright>Copyright © 2015, fivenine GmbH</copyright>
     <licenseUrl>https://github.com/fiveninedigital/UnifiedStorage/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/fiveninedigital/UnifiedStorage/blob/master/</projectUrl>
-    <iconUrl>https://dsplaisted.blob.core.windows.net/oss/pickles_64.png</iconUrl>
+    <iconUrl>https://github.com/fiveninedigital/UnifiedStorage/blob/master/Icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Unified Storage provides a unified file IO API for various platforms. It is based on the excellent PCLStorage library. UnifiedStorage tries to make testing your applications easier by providing interfaces for all classes and not using static factories.</description>
     <summary>Unified Storage provides a consistent, portable set of local file IO APIs across .NET platforms.</summary>
