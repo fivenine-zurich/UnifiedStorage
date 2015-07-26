@@ -76,5 +76,24 @@ namespace UnifiedStorage.Shared.Tests
             // Cleanup
             await directory.DeleteAsync();
         }
+
+#if MSTEST
+        [TestMethod]
+#else
+        [Test]
+#endif
+        public virtual async Task Verify_that_Name_returns_only_the_directory_name()
+        {
+            var folder = Filesystem.LocalStorage;
+            var directoryName = Guid.NewGuid().ToString();
+
+            var directory = await folder.CreateDirectoryAsync(directoryName, CollisionOption.FailIfExists);
+
+            (await directory.ExistsAsync()).Should().BeTrue();
+            directory.Name.Should().Be(directoryName);
+
+            // Cleanup
+            await directory.DeleteAsync();
+        }
     }
 }

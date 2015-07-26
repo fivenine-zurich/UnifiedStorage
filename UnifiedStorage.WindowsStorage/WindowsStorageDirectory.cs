@@ -21,8 +21,8 @@ namespace UnifiedStorage.WindowsStorage
     [DebuggerDisplay("Name = {Name}")]
     internal class WindowsStorageDirectory : IDirectory
     {
-        private IStorageFolder _storage;
-        private string _path;
+        private readonly IStorageFolder _storage;
+        private readonly string _path;
 
         public WindowsStorageDirectory(IStorageFolder storage)
         {

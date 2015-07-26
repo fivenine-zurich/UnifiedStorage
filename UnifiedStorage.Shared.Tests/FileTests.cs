@@ -50,6 +50,24 @@ namespace UnifiedStorage.Shared.Tests
             file.Should().NotBeNull();
             file.Name.Should().Be(filename);
         }
+
+#if MSTEST
+        [TestMethod]
+#else
+        [Test]
+#endif
+        public virtual async Task Verify_that_Path_returns_the_full_path_of_the_file_including_its_filename()
+        {
+            var fileFolder = Filesystem.CreatePath(Filesystem.LocalStorage.Path);
+            var filename = Guid.NewGuid() + ".txt";
+            var fullPath = fileFolder.Combine(filename);
+
+            var file = await Filesystem.GetFileFromPathAsync(fullPath);
+
+            file.Should().NotBeNull();
+            file.Path.Should().Be(fullPath);
+        }
+
 #if MSTEST
         [DataTestMethod]
         [DataRow("test.txt", ".txt")]

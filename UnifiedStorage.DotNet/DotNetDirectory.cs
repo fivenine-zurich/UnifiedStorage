@@ -23,7 +23,7 @@ namespace UnifiedStorage.DotNet
         public DotNetDirectory(string path)
         {
             _path = System.IO.Path.GetFullPath(path);
-            _name = System.IO.Path.GetDirectoryName(path);
+            _name = System.IO.Path.GetFileName(path);
         }
 
         public string Name
