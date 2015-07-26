@@ -14,7 +14,7 @@ namespace UnifiedStorage.WindowsStorage
     /// </summary>
     public class FileSystem : IFileSystem
     {
-        private ApplicationData _appData;
+        private readonly ApplicationData _appData;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FileSystem"/> class.

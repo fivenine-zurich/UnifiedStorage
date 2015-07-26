@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.22823.1
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnifiedStorage", "UnifiedStorage\UnifiedStorage.csproj", "{92ED44DD-8CC0-4D2C-849B-F62AF5DE52E7}"
 EndProject
@@ -172,6 +172,7 @@ Global
 		{320757AE-C53B-4C18-A565-500C68C35140}.Release|x86.Build.0 = Release|Any CPU
 		{91F784BB-408A-4861-BBCE-9A496292D810}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{91F784BB-408A-4861-BBCE-9A496292D810}.Debug|Any CPU.Build.0 = Debug|x86
+		{91F784BB-408A-4861-BBCE-9A496292D810}.Debug|Any CPU.Deploy.0 = Debug|x86
 		{91F784BB-408A-4861-BBCE-9A496292D810}.Debug|ARM.ActiveCfg = Debug|ARM
 		{91F784BB-408A-4861-BBCE-9A496292D810}.Debug|ARM.Build.0 = Debug|ARM
 		{91F784BB-408A-4861-BBCE-9A496292D810}.Debug|ARM.Deploy.0 = Debug|ARM

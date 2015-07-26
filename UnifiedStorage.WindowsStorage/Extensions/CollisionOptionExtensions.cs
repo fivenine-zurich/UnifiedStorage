@@ -1,6 +1,7 @@
 ﻿using System;
 using Windows.Storage;
 
+// ReSharper disable UseNameofExpression
 // ReSharper disable CheckNamespace
 
 namespace UnifiedStorage.WindowsStorage.Extensions
@@ -18,7 +19,24 @@ namespace UnifiedStorage.WindowsStorage.Extensions
                 case CollisionOption.FailIfExists:
                     return NameCollisionOption.FailIfExists;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(option), option, null);
+                    throw new ArgumentOutOfRangeException("option", option, null);
+            }
+        }
+
+        public static CreationCollisionOption ToCreationCollisionOption(this CollisionOption option)
+        {
+            switch (option)
+            {
+                case CollisionOption.GenerateUniqueName:
+                    return CreationCollisionOption.GenerateUniqueName;
+                case CollisionOption.ReplaceExisting:
+                    return CreationCollisionOption.ReplaceExisting;
+                case CollisionOption.FailIfExists:
+                    return CreationCollisionOption.FailIfExists;
+                case CollisionOption.OpenIfExists:
+                    return CreationCollisionOption.OpenIfExists;
+                default:
+                    throw new ArgumentOutOfRangeException("option", option, null);
             }
         }
     }

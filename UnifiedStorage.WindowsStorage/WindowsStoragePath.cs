@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 using Windows.Storage;
 using UnifiedStorage.WindowsStorage.Extensions;
 
+// ReSharper disable ConvertPropertyToExpressionBody
+// ReSharper disable UseNameofExpression
 // ReSharper disable CheckNamespace
+
 namespace UnifiedStorage.WindowsStorage
 {
     internal class WindowsStoragePath : IPath
@@ -16,6 +19,11 @@ namespace UnifiedStorage.WindowsStorage
 
         public WindowsStoragePath(string path)
         {
+            if (string.IsNullOrWhiteSpace(path))
+            {
+                throw new ArgumentNullException("path");
+            }
+
             _path = path;
         }
 
@@ -23,7 +31,7 @@ namespace UnifiedStorage.WindowsStorage
         {
             get
             {
-                return _path.Equals(Windows.Storage.ApplicationData.Current.LocalFolder.Path,
+                return _path.Equals(ApplicationData.Current.LocalFolder.Path,
                     StringComparison.OrdinalIgnoreCase);
             }
         }
@@ -43,11 +51,18 @@ namespace UnifiedStorage.WindowsStorage
         internal static async Task<ExistenceResult> ItemExistsAsync(string path, string name,
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            var directory = await StorageFolder.GetFolderFromPathAsync(System.IO.Path.GetDirectoryName(path))
+            // Optimization if the current folder is a know root folder
+            if (string.Compare(path, ApplicationData.Current.LocalFolder.Path, StringComparison.OrdinalIgnoreCase) == 0 
+                || string.Compare(path, ApplicationData.Current.RoamingFolder.Path, StringComparison.OrdinalIgnoreCase) == 0
+                || string.Compare(path, ApplicationData.Current.TemporaryFolder.Path, StringComparison.OrdinalIgnoreCase) == 0 )
+            {
+                return ExistenceResult.DirectoryExists;
+            }
+
+            var directory = await StorageFolder.GetFolderFromPathAsync(Path.GetDirectoryName(path))
                 .AsTask(cancellationToken)
                 .ConfigureAwait(false);
-
-
+            
             var result = await directory.GetItemAsync(name)
                 .AsTaskNoThrow(cancellationToken);
 

@@ -7,6 +7,7 @@ using Windows.Storage;
 using UnifiedStorage.Extensions;
 using UnifiedStorage.WindowsStorage.Extensions;
 
+// ReSharper disable UseNameofExpression
 // ReSharper disable UseStringInterpolation
 // ReSharper disable ConvertPropertyToExpressionBody
 // ReSharper disable CheckNamespace
@@ -16,13 +17,13 @@ namespace UnifiedStorage.WindowsStorage
     [DebuggerDisplay("Name = {Name}")]
     internal class WindowsStorageFile : IFile
     {
+        private readonly IStorageFile _storageFile;
+        private string _path;
+
         /// <summary>
         /// The HRESULT on a System.Exception thrown when a file collision occurs.
         /// </summary>
         internal const int FileAlreadyExists = unchecked((int)0x800700B7);
-
-        private IStorageFile _storageFile;
-        private string _path;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WindowsStorageFile"/> class.
@@ -94,6 +95,9 @@ namespace UnifiedStorage.WindowsStorage
         public async Task DeleteAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
             cancellationToken.ThrowIfCancellationRequested();
+
+            await EnsureExistsAsync(cancellationToken);
+
             await _storageFile.DeleteAsync()
                 .AsTask(cancellationToken)
                 .ConfigureAwait(false);
@@ -102,23 +106,13 @@ namespace UnifiedStorage.WindowsStorage
         public async Task<IFile> RenameAsync(string newName, CollisionOption collisionOption = CollisionOption.FailIfExists,
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            try
+            var directory = System.IO.Path.GetDirectoryName(_path);
+            if (newName.StartsWith(directory))
             {
-                await _storageFile.RenameAsync(newName, (NameCollisionOption) collisionOption)
-                    .AsTask(cancellationToken)
-                    .ConfigureAwait(false);
-            }
-            catch (Exception ex)
-            {
-                if (ex.HResult == FileAlreadyExists)
-                {
-                    throw new IOException("File already exists.", ex);
-                }
-
-                throw;
+                throw new ArgumentException("The filename must not contain a path", "newName");
             }
 
-            return this;
+            return await MoveAsync(System.IO.Path.Combine(directory, newName), collisionOption, cancellationToken);
         }
 
         public async Task<IFile> MoveAsync(string newPath, CollisionOption collisionOption = CollisionOption.ReplaceExisting,
@@ -140,16 +134,12 @@ namespace UnifiedStorage.WindowsStorage
             {
                 if (ex.HResult == FileAlreadyExists)
                 {
-                    throw new IOException(string.Format("The file {0} already exists", newPath), ex);
+                    throw new Exceptions.UnifiedIOException(string.Format("The file {0} already exists", newPath), ex);
                 }
 
-                throw new IOException(
+                throw new Exceptions.UnifiedIOException(
                     string.Format("Could not move the file {0} to {1}: {2}", _path, newPath, ex.Message), ex);
             }
-
-            _storageFile = await StorageFile.GetFileFromPathAsync(newPath)
-                    .AsTask(cancellationToken)
-                    .ConfigureAwait(false);
 
             _path = _storageFile.Path;
             return this;

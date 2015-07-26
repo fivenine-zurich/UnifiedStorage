@@ -250,14 +250,20 @@ namespace UnifiedStorage.Shared.Tests
             var newFilename = Helper.CreateUniqueFileName();
             var folder = Filesystem.LocalStorage;
 
-            var file = await Helper.GenerateFileAsync(folder, filename);
-            var newFile = await file.RenameAsync(newFilename, CollisionOption.FailIfExists);
+            var sourceFile = await Helper.GenerateFileAsync(folder, filename);
+            var sourcePath = sourceFile.Path;
+            var sourceName = sourceFile.Name;
 
-            file.Path.Should().Be(newFile.Path);
-            file.Name.Should().Be(newFilename);
+            var destinationFile = await sourceFile.RenameAsync(newFilename, CollisionOption.FailIfExists);
+
+            destinationFile.Path.Should().NotBe(sourcePath);
+            destinationFile.Name.Should().NotBe(sourceName);
+
+            destinationFile.Path.Should().Be(sourceFile.Path);
+            destinationFile.Name.Should().Be(sourceFile.Name);
 
             // Cleanup
-            await file.DeleteAsync();
+            await sourceFile.DeleteAsync();
         }
 
 #if MSTEST

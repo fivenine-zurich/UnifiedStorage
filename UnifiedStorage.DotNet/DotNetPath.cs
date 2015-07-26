@@ -2,6 +2,8 @@
 using System.IO;
 using System.Linq;
 
+// ReSharper disable ConvertPropertyToExpressionBody
+
 namespace UnifiedStorage.DotNet
 {
     internal class DotNetPath : IPath
