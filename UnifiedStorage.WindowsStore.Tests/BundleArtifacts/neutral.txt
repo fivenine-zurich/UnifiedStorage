@@ -1,0 +1,2 @@
+MainPackage=C:\Users\Tobias\Code\UnifiedStorage\bin\WindowsStore\Debug\UnifiedStorage.WindowsStore.Tests_1.0.0.1_AnyCPU_Debug.appx
+SymbolPackage=C:\Users\Tobias\Code\UnifiedStorage\bin\WindowsStore\Package\UnifiedStorage.WindowsStore.Tests_1.0.0.1_Debug_Test\UnifiedStorage.WindowsStore.Tests_1.0.0.1_AnyCPU_Debug.appxsym
