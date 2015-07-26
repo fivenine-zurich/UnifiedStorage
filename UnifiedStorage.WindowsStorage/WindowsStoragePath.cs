@@ -51,7 +51,7 @@ namespace UnifiedStorage.WindowsStorage
         internal static async Task<ExistenceResult> ItemExistsAsync(string path, string name,
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            // Optimization if the current folder is a know root folder
+            // Optimization if the current folder is a know root folder as GetFolderFromPathAsync is unable to retrieve this folder
             if (string.Compare(path, ApplicationData.Current.LocalFolder.Path, StringComparison.OrdinalIgnoreCase) == 0 
                 || string.Compare(path, ApplicationData.Current.RoamingFolder.Path, StringComparison.OrdinalIgnoreCase) == 0
                 || string.Compare(path, ApplicationData.Current.TemporaryFolder.Path, StringComparison.OrdinalIgnoreCase) == 0 )
@@ -74,9 +74,9 @@ namespace UnifiedStorage.WindowsStorage
                 }
                 else
                 {
-                    // rethrow unexpected exceptions.
+                    // Rethrow unexpected exceptions.
                     result.GetAwaiter().GetResult();
-                    throw result.Exception; // shouldn't reach here anyway.
+                    throw result.Exception;
                 }
             }
             else if (result.IsCanceled)

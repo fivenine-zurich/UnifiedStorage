@@ -82,15 +82,6 @@
     <SDKReference Include="TestPlatform, Version=14.0" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\UnifiedStorage.Shared.Tests\DirectoryTests.cs">
-      <Link>DirectoryTests.cs</Link>
-    </Compile>
-    <Compile Include="..\UnifiedStorage.Shared.Tests\FileSystemTests.cs">
-      <Link>FileSystemTests.cs</Link>
-    </Compile>
-    <Compile Include="..\UnifiedStorage.Shared.Tests\FileTests.cs">
-      <Link>FileTests.cs</Link>
-    </Compile>
     <Compile Include="..\UnifiedStorage.Shared.Tests\Helper.cs">
       <Link>Helper.cs</Link>
     </Compile>
