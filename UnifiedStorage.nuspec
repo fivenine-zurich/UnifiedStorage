@@ -9,13 +9,13 @@
     <copyright>Copyright © 2015, fivenine GmbH</copyright>
     <licenseUrl>https://github.com/fiveninedigital/UnifiedStorage/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/fiveninedigital/UnifiedStorage/blob/master/</projectUrl>
-    <iconUrl>https://github.com/fiveninedigital/UnifiedStorage/blob/master/Icon.png</iconUrl>
+    <iconUrl>https://raw.githubusercontent.com/fiveninedigital/UnifiedStorage/master/Icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Unified Storage provides a unified file IO API for various platforms. It is based on the excellent PCLStorage library. UnifiedStorage tries to make testing your applications easier by providing interfaces for all classes and not using static factories.</description>
     <summary>Unified Storage provides a consistent, portable set of local file IO APIs across .NET platforms.</summary>
     <tags>io storage file portable pcl winrt android ios xamarin monoandroid monodroid monotouch</tags>
     <releaseNotes>
-      1.0.0.0
+      1.0.0
       ---------------------
       - Initial version of the package
     </releaseNotes>
