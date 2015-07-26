@@ -41,5 +41,9 @@
     <file src="bin\monoandroid\UnifiedStorage*.dll" target="lib\monoandroid\" />
     <file src="bin\monoandroid\UnifiedStorage*.xml" target="lib\monoandroid\" />
 
+    <!--Windows Storage (Windows Phone 8.1, Windows Store 8.1)-->
+    <file src="bin\Portable-Win81+Wpa81\UnifiedStorage*.dll" target="lib\Portable-Win81+Wpa81\" />
+    <file src="bin\Portable-Win81+Wpa81\UnifiedStorage*.xml" target="lib\Portable-Win81+Wpa81\" />
+
   </files>
 </package>

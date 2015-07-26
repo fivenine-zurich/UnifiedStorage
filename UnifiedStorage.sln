@@ -9,10 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnifiedStorage.Desktop", "U
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnifiedStorage.Android", "UnifiedStorage.Android\UnifiedStorage.Android.csproj", "{3FFA1E69-766E-428C-9E5C-21222EDDADBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnifiedStorage.WindowsStore", "UnifiedStorage.WindowsStore\UnifiedStorage.WindowsStore.csproj", "{6C005B29-BD55-4C04-BDCB-964769E03052}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnifiedStorage.WindowsPhone", "UnifiedStorage.WindowsPhone\UnifiedStorage.WindowsPhone.csproj", "{22335957-C662-435E-92EF-68247FD2F085}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnifiedStorage.iOS", "UnifiedStorage.iOS\UnifiedStorage.iOS.csproj", "{D67A2B5B-AE69-42EE-A305-347DE7C018B9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{ADD49511-6D92-4314-AC88-13EF99698B1C}"
@@ -26,8 +22,6 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "UnifiedStorage.Shared.Tests
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnifiedStorage.Desktop.Tests", "UnifiedStorage.Desktop.Tests\UnifiedStorage.Desktop.Tests.csproj", "{320757AE-C53B-4C18-A565-500C68C35140}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "UnifiedStorage.WindowsStorage", "UnifiedStorage.WindowsStorage\UnifiedStorage.WindowsStorage.shproj", "{DEB5AA52-2E68-4347-AD00-73E4F6AF94C3}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnifiedStorage.WindowsPhone.Tests", "UnifiedStorage.WindowsPhone.Tests\UnifiedStorage.WindowsPhone.Tests.csproj", "{91F784BB-408A-4861-BBCE-9A496292D810}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnifiedStorage.DotNet", "UnifiedStorage.DotNet\UnifiedStorage.DotNet.csproj", "{5ED58594-002A-4FA9-B29D-8B5763837BAF}"
@@ -38,15 +32,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platforms", "Platforms", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{51772E54-6294-4682-AF20-B6158BBB1ACE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnifiedStorage.WindowsStorage", "UnifiedStorage.WindowsStorage\UnifiedStorage.WindowsStorage.csproj", "{2F2F2C20-7D36-40A3-B26C-1681C92D7290}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		UnifiedStorage.WindowsStorage\UnifiedStorage.WindowsStorage.projitems*{deb5aa52-2e68-4347-ad00-73e4f6af94c3}*SharedItemsImports = 13
-		UnifiedStorage.WindowsStorage\UnifiedStorage.WindowsStorage.projitems*{22335957-c662-435e-92ef-68247fd2f085}*SharedItemsImports = 4
 		UnifiedStorage.Shared.Tests\UnifiedStorage.Shared.Tests.projitems*{320757ae-c53b-4c18-a565-500c68c35140}*SharedItemsImports = 4
 		UnifiedStorage.Shared.Tests\UnifiedStorage.Shared.Tests.projitems*{5e2c157f-d59f-4b95-8a6e-cecfbe18de62}*SharedItemsImports = 13
-		UnifiedStorage.WindowsStorage\UnifiedStorage.WindowsStorage.projitems*{6c005b29-bd55-4c04-bdcb-964769e03052}*SharedItemsImports = 4
-		UnifiedStorage.WindowsStorage\UnifiedStorage.WindowsStorage.projitems*{91f784bb-408a-4861-bbce-9a496292d810}*SharedItemsImports = 4
-		UnifiedStorage.WindowsStorage\UnifiedStorage.WindowsStorage.projitems*{ce9f8871-905a-418a-a053-231b0680f6f6}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -107,38 +98,6 @@ Global
 		{3FFA1E69-766E-428C-9E5C-21222EDDADBB}.Release|x64.Build.0 = Release|Any CPU
 		{3FFA1E69-766E-428C-9E5C-21222EDDADBB}.Release|x86.ActiveCfg = Release|Any CPU
 		{3FFA1E69-766E-428C-9E5C-21222EDDADBB}.Release|x86.Build.0 = Release|Any CPU
-		{6C005B29-BD55-4C04-BDCB-964769E03052}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6C005B29-BD55-4C04-BDCB-964769E03052}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6C005B29-BD55-4C04-BDCB-964769E03052}.Debug|ARM.ActiveCfg = Debug|ARM
-		{6C005B29-BD55-4C04-BDCB-964769E03052}.Debug|ARM.Build.0 = Debug|ARM
-		{6C005B29-BD55-4C04-BDCB-964769E03052}.Debug|x64.ActiveCfg = Debug|x64
-		{6C005B29-BD55-4C04-BDCB-964769E03052}.Debug|x64.Build.0 = Debug|x64
-		{6C005B29-BD55-4C04-BDCB-964769E03052}.Debug|x86.ActiveCfg = Debug|x86
-		{6C005B29-BD55-4C04-BDCB-964769E03052}.Debug|x86.Build.0 = Debug|x86
-		{6C005B29-BD55-4C04-BDCB-964769E03052}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6C005B29-BD55-4C04-BDCB-964769E03052}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6C005B29-BD55-4C04-BDCB-964769E03052}.Release|ARM.ActiveCfg = Release|ARM
-		{6C005B29-BD55-4C04-BDCB-964769E03052}.Release|ARM.Build.0 = Release|ARM
-		{6C005B29-BD55-4C04-BDCB-964769E03052}.Release|x64.ActiveCfg = Release|x64
-		{6C005B29-BD55-4C04-BDCB-964769E03052}.Release|x64.Build.0 = Release|x64
-		{6C005B29-BD55-4C04-BDCB-964769E03052}.Release|x86.ActiveCfg = Release|x86
-		{6C005B29-BD55-4C04-BDCB-964769E03052}.Release|x86.Build.0 = Release|x86
-		{22335957-C662-435E-92EF-68247FD2F085}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{22335957-C662-435E-92EF-68247FD2F085}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{22335957-C662-435E-92EF-68247FD2F085}.Debug|ARM.ActiveCfg = Debug|ARM
-		{22335957-C662-435E-92EF-68247FD2F085}.Debug|ARM.Build.0 = Debug|ARM
-		{22335957-C662-435E-92EF-68247FD2F085}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{22335957-C662-435E-92EF-68247FD2F085}.Debug|x64.Build.0 = Debug|Any CPU
-		{22335957-C662-435E-92EF-68247FD2F085}.Debug|x86.ActiveCfg = Debug|x86
-		{22335957-C662-435E-92EF-68247FD2F085}.Debug|x86.Build.0 = Debug|x86
-		{22335957-C662-435E-92EF-68247FD2F085}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{22335957-C662-435E-92EF-68247FD2F085}.Release|Any CPU.Build.0 = Release|Any CPU
-		{22335957-C662-435E-92EF-68247FD2F085}.Release|ARM.ActiveCfg = Release|ARM
-		{22335957-C662-435E-92EF-68247FD2F085}.Release|ARM.Build.0 = Release|ARM
-		{22335957-C662-435E-92EF-68247FD2F085}.Release|x64.ActiveCfg = Release|Any CPU
-		{22335957-C662-435E-92EF-68247FD2F085}.Release|x64.Build.0 = Release|Any CPU
-		{22335957-C662-435E-92EF-68247FD2F085}.Release|x86.ActiveCfg = Release|x86
-		{22335957-C662-435E-92EF-68247FD2F085}.Release|x86.Build.0 = Release|x86
 		{D67A2B5B-AE69-42EE-A305-347DE7C018B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D67A2B5B-AE69-42EE-A305-347DE7C018B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D67A2B5B-AE69-42EE-A305-347DE7C018B9}.Debug|ARM.ActiveCfg = Debug|Any CPU
@@ -230,6 +189,22 @@ Global
 		{CE9F8871-905A-418A-A053-231B0680F6F6}.Release|x86.ActiveCfg = Release|x86
 		{CE9F8871-905A-418A-A053-231B0680F6F6}.Release|x86.Build.0 = Release|x86
 		{CE9F8871-905A-418A-A053-231B0680F6F6}.Release|x86.Deploy.0 = Release|x86
+		{2F2F2C20-7D36-40A3-B26C-1681C92D7290}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F2F2C20-7D36-40A3-B26C-1681C92D7290}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F2F2C20-7D36-40A3-B26C-1681C92D7290}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{2F2F2C20-7D36-40A3-B26C-1681C92D7290}.Debug|ARM.Build.0 = Debug|Any CPU
+		{2F2F2C20-7D36-40A3-B26C-1681C92D7290}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2F2F2C20-7D36-40A3-B26C-1681C92D7290}.Debug|x64.Build.0 = Debug|Any CPU
+		{2F2F2C20-7D36-40A3-B26C-1681C92D7290}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2F2F2C20-7D36-40A3-B26C-1681C92D7290}.Debug|x86.Build.0 = Debug|Any CPU
+		{2F2F2C20-7D36-40A3-B26C-1681C92D7290}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F2F2C20-7D36-40A3-B26C-1681C92D7290}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F2F2C20-7D36-40A3-B26C-1681C92D7290}.Release|ARM.ActiveCfg = Release|Any CPU
+		{2F2F2C20-7D36-40A3-B26C-1681C92D7290}.Release|ARM.Build.0 = Release|Any CPU
+		{2F2F2C20-7D36-40A3-B26C-1681C92D7290}.Release|x64.ActiveCfg = Release|Any CPU
+		{2F2F2C20-7D36-40A3-B26C-1681C92D7290}.Release|x64.Build.0 = Release|Any CPU
+		{2F2F2C20-7D36-40A3-B26C-1681C92D7290}.Release|x86.ActiveCfg = Release|Any CPU
+		{2F2F2C20-7D36-40A3-B26C-1681C92D7290}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -237,8 +212,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{03F85FC3-3534-4489-ADE7-4327B99CA33B} = {2E400F36-E3A4-4698-A7D7-B476319932FC}
 		{3FFA1E69-766E-428C-9E5C-21222EDDADBB} = {2E400F36-E3A4-4698-A7D7-B476319932FC}
-		{6C005B29-BD55-4C04-BDCB-964769E03052} = {2E400F36-E3A4-4698-A7D7-B476319932FC}
-		{22335957-C662-435E-92EF-68247FD2F085} = {2E400F36-E3A4-4698-A7D7-B476319932FC}
 		{D67A2B5B-AE69-42EE-A305-347DE7C018B9} = {2E400F36-E3A4-4698-A7D7-B476319932FC}
 		{5E2C157F-D59F-4B95-8A6E-CECFBE18DE62} = {51772E54-6294-4682-AF20-B6158BBB1ACE}
 		{320757AE-C53B-4C18-A565-500C68C35140} = {51772E54-6294-4682-AF20-B6158BBB1ACE}

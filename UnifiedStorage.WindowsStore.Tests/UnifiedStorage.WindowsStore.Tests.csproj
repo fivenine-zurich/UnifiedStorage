@@ -29,7 +29,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\bin\WindowsStore\Debug\</OutputPath>
+    <OutputPath>..\bin\Tests\WindowsStore\</OutputPath>
     <DefineConstants>TRACE;DEBUG;NETFX_CORE;MSTEST</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -40,7 +40,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\bin\WindowsStore\Release\</OutputPath>
+    <OutputPath>..\bin\Tests\WindowsStore\</OutputPath>
     <DefineConstants>TRACE;NETFX_CORE;MSTEST</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -170,12 +170,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\UnifiedStorage.WindowsStorage\UnifiedStorage.WindowsStorage.csproj">
+      <Project>{2F2F2C20-7D36-40A3-B26C-1681C92D7290}</Project>
+      <Name>UnifiedStorage.WindowsStorage</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UnifiedStorage\UnifiedStorage.csproj">
       <Project>{92ed44dd-8cc0-4d2c-849b-f62af5de52e7}</Project>
       <Name>UnifiedStorage</Name>
     </ProjectReference>
   </ItemGroup>
-  <Import Project="..\UnifiedStorage.WindowsStorage\UnifiedStorage.WindowsStorage.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
