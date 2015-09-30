@@ -35,6 +35,10 @@
     <CodesignKey>iPhone Developer</CodesignKey>
     <DocumentationFile>..\bin\Xamarin.iOS10\UnifiedStorage.iOS.XML</DocumentationFile>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|iPhone'">
+    <OutputPath>..\bin\Release\Xamarin.iOS10\</OutputPath>
+    <DocumentationFile>..\bin\Release\Xamarin.iOS10\UnifiedStorage.iOS.XML</DocumentationFile>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="FileSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
