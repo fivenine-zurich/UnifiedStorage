@@ -163,7 +163,12 @@ namespace UnifiedStorage.DotNet
             using (Stream source = File.Open(_path, FileMode.Open))
             {
                 const int bufferSize = 4096;
+
+#if __UNIFIED__ || _ANDROID_
+                using (Stream destination = File.Create(newPath, bufferSize))
+#else
                 using (Stream destination = File.Create(newPath, bufferSize, FileOptions.Asynchronous))
+#endif
                 {
                     await source.CopyToAsync(destination, bufferSize, cancellationToken);
                 }

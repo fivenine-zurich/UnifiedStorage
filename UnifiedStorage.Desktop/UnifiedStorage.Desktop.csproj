@@ -47,15 +47,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\UnifiedStorage.DotNet\UnifiedStorage.DotNet.csproj">
-      <Project>{5ed58594-002a-4fa9-b29d-8b5763837baf}</Project>
-      <Name>UnifiedStorage.DotNet</Name>
-    </ProjectReference>
     <ProjectReference Include="..\UnifiedStorage\UnifiedStorage.csproj">
       <Project>{92ED44DD-8CC0-4D2C-849B-F62AF5DE52E7}</Project>
       <Name>UnifiedStorage</Name>
     </ProjectReference>
   </ItemGroup>
+  <Import Project="..\UnifiedStorage.SysIo\UnifiedStorage.SysIo.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

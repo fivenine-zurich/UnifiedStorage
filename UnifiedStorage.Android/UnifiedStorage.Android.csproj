@@ -22,7 +22,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\bin\monoandroid\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;_ANDROID_</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>..\bin\monoandroid\UnifiedStorage.Android.xml</DocumentationFile>
@@ -31,7 +31,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>..\bin\monoandroid\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;_ANDROID_</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>..\bin\monoandroid\UnifiedStorage.Android.xml</DocumentationFile>
@@ -56,15 +56,12 @@
     <AndroidResource Include="Resources\Values\Strings.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\UnifiedStorage.DotNet\UnifiedStorage.DotNet.csproj">
-      <Project>{5ed58594-002a-4fa9-b29d-8b5763837baf}</Project>
-      <Name>UnifiedStorage.DotNet</Name>
-    </ProjectReference>
     <ProjectReference Include="..\UnifiedStorage\UnifiedStorage.csproj">
       <Project>{92ed44dd-8cc0-4d2c-849b-f62af5de52e7}</Project>
       <Name>UnifiedStorage</Name>
     </ProjectReference>
   </ItemGroup>
+  <Import Project="..\UnifiedStorage.SysIo\UnifiedStorage.SysIo.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -24,8 +24,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnifiedStorage.Desktop.Test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnifiedStorage.WindowsPhone.Tests", "UnifiedStorage.WindowsPhone.Tests\UnifiedStorage.WindowsPhone.Tests.csproj", "{91F784BB-408A-4861-BBCE-9A496292D810}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnifiedStorage.DotNet", "UnifiedStorage.DotNet\UnifiedStorage.DotNet.csproj", "{5ED58594-002A-4FA9-B29D-8B5763837BAF}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnifiedStorage.WindowsStore.Tests", "UnifiedStorage.WindowsStore.Tests\UnifiedStorage.WindowsStore.Tests.csproj", "{CE9F8871-905A-418A-A053-231B0680F6F6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platforms", "Platforms", "{2E400F36-E3A4-4698-A7D7-B476319932FC}"
@@ -34,10 +32,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{51772E54
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnifiedStorage.WindowsStorage", "UnifiedStorage.WindowsStorage\UnifiedStorage.WindowsStorage.csproj", "{2F2F2C20-7D36-40A3-B26C-1681C92D7290}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "UnifiedStorage.SysIo", "UnifiedStorage.SysIo\UnifiedStorage.SysIo.shproj", "{4E06FF2D-BE5C-4D04-A720-C75E85C44DB5}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		UnifiedStorage.Shared.Tests\UnifiedStorage.Shared.Tests.projitems*{320757ae-c53b-4c18-a565-500c68c35140}*SharedItemsImports = 4
+		UnifiedStorage.SysIo\UnifiedStorage.SysIo.projitems*{4e06ff2d-be5c-4d04-a720-c75e85c44db5}*SharedItemsImports = 13
 		UnifiedStorage.Shared.Tests\UnifiedStorage.Shared.Tests.projitems*{5e2c157f-d59f-4b95-8a6e-cecfbe18de62}*SharedItemsImports = 13
+		UnifiedStorage.SysIo\UnifiedStorage.SysIo.projitems*{d67a2b5b-ae69-42ee-a305-347de7c018b9}*SharedItemsImports = 4
+		UnifiedStorage.SysIo\UnifiedStorage.SysIo.projitems*{3ffa1e69-766e-428c-9e5c-21222eddadbb}*SharedItemsImports = 4
+		UnifiedStorage.SysIo\UnifiedStorage.SysIo.projitems*{03f85fc3-3534-4489-ade7-4327b99ca33b}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -70,10 +74,6 @@ Global
 		{91F784BB-408A-4861-BBCE-9A496292D810}.Release|Any CPU.ActiveCfg = Release|x86
 		{91F784BB-408A-4861-BBCE-9A496292D810}.Release|Any CPU.Build.0 = Release|x86
 		{91F784BB-408A-4861-BBCE-9A496292D810}.Release|Any CPU.Deploy.0 = Release|x86
-		{5ED58594-002A-4FA9-B29D-8B5763837BAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5ED58594-002A-4FA9-B29D-8B5763837BAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5ED58594-002A-4FA9-B29D-8B5763837BAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5ED58594-002A-4FA9-B29D-8B5763837BAF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CE9F8871-905A-418A-A053-231B0680F6F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CE9F8871-905A-418A-A053-231B0680F6F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE9F8871-905A-418A-A053-231B0680F6F6}.Debug|Any CPU.Deploy.0 = Debug|Any CPU

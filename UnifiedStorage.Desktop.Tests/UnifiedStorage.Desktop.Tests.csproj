@@ -67,10 +67,6 @@
       <Project>{03f85fc3-3534-4489-ade7-4327b99ca33b}</Project>
       <Name>UnifiedStorage.Desktop</Name>
     </ProjectReference>
-    <ProjectReference Include="..\UnifiedStorage.DotNet\UnifiedStorage.DotNet.csproj">
-      <Project>{5ed58594-002a-4fa9-b29d-8b5763837baf}</Project>
-      <Name>UnifiedStorage.DotNet</Name>
-    </ProjectReference>
     <ProjectReference Include="..\UnifiedStorage\UnifiedStorage.csproj">
       <Project>{92ed44dd-8cc0-4d2c-849b-f62af5de52e7}</Project>
       <Name>UnifiedStorage</Name>

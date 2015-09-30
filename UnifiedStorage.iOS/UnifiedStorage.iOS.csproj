@@ -17,7 +17,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\bin\Xamarin.iOS10\</OutputPath>
-    <DefineConstants>DEBUG</DefineConstants>
+    <DefineConstants>DEBUG;__UNIFIED__;__MOBILE__;__IOS__</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
@@ -34,24 +34,21 @@
     <ConsolePause>false</ConsolePause>
     <CodesignKey>iPhone Developer</CodesignKey>
     <DocumentationFile>..\bin\Xamarin.iOS10\UnifiedStorage.iOS.XML</DocumentationFile>
+    <DefineConstants>__UNIFIED__;__MOBILE__;__IOS__</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|iPhone'">
-    <OutputPath>..\bin\Release\Xamarin.iOS10\</OutputPath>
-    <DocumentationFile>..\bin\Release\Xamarin.iOS10\UnifiedStorage.iOS.XML</DocumentationFile>
+    <OutputPath>..\bin\Xamarin.iOS10\</OutputPath>
+    <DocumentationFile>..\bin\Xamarin.iOS10\UnifiedStorage.iOS.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|iPhone'">
+    <OutputPath>..\bin\Xamarin.iOS10\</OutputPath>
+    <DocumentationFile>..\bin\Xamarin.iOS10\UnifiedStorage.iOS.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="FileSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\UnifiedStorage.Desktop\UnifiedStorage.Desktop.csproj">
-      <Project>{03f85fc3-3534-4489-ade7-4327b99ca33b}</Project>
-      <Name>UnifiedStorage.Desktop</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\UnifiedStorage.DotNet\UnifiedStorage.DotNet.csproj">
-      <Project>{5ed58594-002a-4fa9-b29d-8b5763837baf}</Project>
-      <Name>UnifiedStorage.DotNet</Name>
-    </ProjectReference>
     <ProjectReference Include="..\UnifiedStorage\UnifiedStorage.csproj">
       <Project>{92ed44dd-8cc0-4d2c-849b-f62af5de52e7}</Project>
       <Name>UnifiedStorage</Name>
@@ -63,5 +60,6 @@
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
+  <Import Project="..\UnifiedStorage.SysIo\UnifiedStorage.SysIo.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
