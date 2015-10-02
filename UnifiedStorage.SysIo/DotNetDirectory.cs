@@ -5,7 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using UnifiedStorage.Exceptions;
 using UnifiedStorage.Extensions;
+using DirectoryNotFoundException = UnifiedStorage.Exceptions.DirectoryNotFoundException;
 
 // ReSharper disable ConvertToAutoProperty
 // ReSharper disable UseNameofExpression
@@ -69,7 +71,7 @@ namespace UnifiedStorage.DotNet
                         break;
                     }
                     case CollisionOption.FailIfExists:
-                        throw new Exceptions.UnifiedIOException("Cannot create file, it already exists");
+                        throw new UnifiedIOException("Cannot create file, it already exists");
 
                     case CollisionOption.OpenIfExists:
                     {
@@ -160,7 +162,7 @@ namespace UnifiedStorage.DotNet
                     }
 
                     case CollisionOption.FailIfExists:
-                        throw new Exceptions.UnifiedIOException(string.Format("The directory {0} already exists",
+                        throw new UnifiedIOException(string.Format("The directory {0} already exists",
                             newPath));
 
                     case CollisionOption.OpenIfExists:
@@ -215,6 +217,7 @@ namespace UnifiedStorage.DotNet
 
         private void CreateFile(string filePath)
         {
+            // ReSharper disable once UnusedVariable
             using (var stream = File.Create(filePath))
             {
             }
@@ -224,7 +227,7 @@ namespace UnifiedStorage.DotNet
         {
             if (!Directory.Exists(_path))
             {
-                throw new Exceptions.DirectoryNotFoundException(this);
+                throw new DirectoryNotFoundException(this);
             }
         }
     }

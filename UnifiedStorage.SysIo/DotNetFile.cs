@@ -3,7 +3,9 @@ using System.Globalization;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using UnifiedStorage.Exceptions;
 using UnifiedStorage.Extensions;
+using FileNotFoundException = UnifiedStorage.Exceptions.FileNotFoundException;
 
 // ReSharper disable UseNameofExpression
 // ReSharper disable UseStringInterpolation
@@ -124,7 +126,7 @@ namespace UnifiedStorage.DotNet
                     {
                         case CollisionOption.FailIfExists:
                         {
-                            throw new Exceptions.UnifiedIOException("File already exists.");
+                            throw new UnifiedIOException("File already exists.");
                         }
 
                         case CollisionOption.GenerateUniqueName:
@@ -187,7 +189,7 @@ namespace UnifiedStorage.DotNet
         {
             if (!File.Exists(_path))
             {
-                throw new Exceptions.FileNotFoundException(this);
+                throw new FileNotFoundException(this);
             }
         }
     }

@@ -4,8 +4,10 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.Storage;
+using UnifiedStorage.Exceptions;
 using UnifiedStorage.Extensions;
 using UnifiedStorage.WindowsStorage.Extensions;
+using FileNotFoundException = UnifiedStorage.Exceptions.FileNotFoundException;
 
 // ReSharper disable UseNameofExpression
 // ReSharper disable UseStringInterpolation
@@ -134,10 +136,10 @@ namespace UnifiedStorage.WindowsStorage
             {
                 if (ex.HResult == FileAlreadyExists)
                 {
-                    throw new Exceptions.UnifiedIOException(string.Format("The file {0} already exists", newPath), ex);
+                    throw new UnifiedIOException(string.Format("The file {0} already exists", newPath), ex);
                 }
 
-                throw new Exceptions.UnifiedIOException(
+                throw new UnifiedIOException(
                     string.Format("Could not move the file {0} to {1}: {2}", _path, newPath, ex.Message), ex);
             }
 
@@ -179,7 +181,7 @@ namespace UnifiedStorage.WindowsStorage
         {
             if (!await ExistsAsync(cancellationToken))
             {
-                throw new Exceptions.FileNotFoundException(this);
+                throw new FileNotFoundException(this);
             }
         }
     }

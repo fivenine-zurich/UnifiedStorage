@@ -5,6 +5,7 @@ namespace UnifiedStorage.Exceptions
     /// <summary>
     /// A IO exception for UnifiedStorage operations.
     /// </summary>
+    // ReSharper disable once InconsistentNaming
     public class UnifiedIOException : UnifiedStorageException
     {
         /// <summary>

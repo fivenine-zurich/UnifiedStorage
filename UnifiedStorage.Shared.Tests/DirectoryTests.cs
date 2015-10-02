@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using FluentAssertions;
-
 #if MSTEST
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 #else

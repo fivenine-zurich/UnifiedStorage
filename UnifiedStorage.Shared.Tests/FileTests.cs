@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Threading.Tasks;
 using FluentAssertions;
-
+using UnifiedStorage.Exceptions;
 #if MSTEST
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 #else
@@ -211,7 +211,7 @@ namespace UnifiedStorage.Shared.Tests
             var existingFile = await Helper.GenerateFileAsync(folder, newFilename);
 
             Func<Task> act = () => sourceFile.MoveAsync(newFilepath, CollisionOption.FailIfExists);
-            act.ShouldThrow<Exceptions.UnifiedIOException>();
+            act.ShouldThrow<UnifiedIOException>();
 
             (await sourceFile.ExistsAsync()).Should().BeTrue("Expecting the source file to be untouched");
 
@@ -254,7 +254,7 @@ namespace UnifiedStorage.Shared.Tests
             (await sourceFile.ExistsAsync()).Should().BeFalse();
 
             Func<Task> act = () => sourceFile.DeleteAsync();
-            act.ShouldThrow<Exceptions.FileNotFoundException>();
+            act.ShouldThrow<FileNotFoundException>();
         }
 
 #if MSTEST
@@ -347,7 +347,7 @@ namespace UnifiedStorage.Shared.Tests
             var existingFile = await Helper.GenerateFileAsync(folder, newFilename);
 
             Func<Task> act = () => sourceFile.RenameAsync(newFilename, CollisionOption.FailIfExists);
-            act.ShouldThrow<Exceptions.UnifiedIOException>();
+            act.ShouldThrow<UnifiedIOException>();
 
             (await sourceFile.ExistsAsync()).Should().BeTrue("Expecting the source file to be untouched");
 

@@ -10,6 +10,7 @@ using Windows.Storage;
 using UnifiedStorage.Exceptions;
 using UnifiedStorage.Extensions;
 using UnifiedStorage.WindowsStorage.Extensions;
+using FileNotFoundException = System.IO.FileNotFoundException;
 
 // ReSharper disable MergeConditionalExpression
 // ReSharper disable UseNameofExpression
@@ -63,7 +64,7 @@ namespace UnifiedStorage.WindowsStorage
                 if (ex.HResult == WindowsStorageFile.FileAlreadyExists)
                 {
                     //  File already exists (and potentially other failures, not sure what the HResult represents)
-                    throw new Exceptions.UnifiedIOException(ex.Message, ex);
+                    throw new UnifiedIOException(ex.Message, ex);
                 }
                 throw;
             }
@@ -82,7 +83,7 @@ namespace UnifiedStorage.WindowsStorage
 
                 return new WindowsStorageFile(file);
             }
-            catch (System.IO.FileNotFoundException)
+            catch (FileNotFoundException)
             {
                 throw new Exceptions.FileNotFoundException(new WindowsStorageFile(name));
             }
@@ -124,7 +125,7 @@ namespace UnifiedStorage.WindowsStorage
                 if (ex.HResult == WindowsStorageFile.FileAlreadyExists)
                 {
                     //  Folder already exists (and potentially other failures, not sure what the HResult represents)
-                    throw new Exceptions.UnifiedIOException(ex.Message, ex);
+                    throw new UnifiedIOException(ex.Message, ex);
                 }
 
                 throw;
@@ -146,7 +147,7 @@ namespace UnifiedStorage.WindowsStorage
 
                 return new WindowsStorageDirectory(storageDir);
             }
-            catch (System.IO.FileNotFoundException)
+            catch (FileNotFoundException)
             {
                 return new WindowsStorageDirectory(System.IO.Path.Combine(_path, name));
             }
@@ -154,7 +155,7 @@ namespace UnifiedStorage.WindowsStorage
 
         public Task<IList<IDirectory>> GetDirectoriesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public async Task<bool> ExistsAsync(CancellationToken cancellationToken = new CancellationToken())
